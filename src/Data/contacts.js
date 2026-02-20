@@ -3,7 +3,8 @@ const contacts = [
   { id: "reptil", name: "Reptiliano RRHH" },
   { id: "area51", name: "Área 51 Soporte Técnico" },
   { id: "clima", name: "El que controla el clima" },
-  { id: "gatos", name: "Sociedad de Gatitos Cósmicos" }
+  { id: "gatos", name: "Sociedad de Gatitos Cósmicos" },
+  { id: "mark", name: "Mark Zuckerberg" }
 ];
 
 export default contacts;
