@@ -59,3 +59,73 @@ h1, h2 {
     border-bottom: 1px solid #00ff88;
   }
 }
+
+/* ESTILOS TIPO BURBUJA */
+
+.messages {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.message {
+  max-width: 60%;
+  padding: 10px 15px;
+  border-radius: 15px;
+  font-size: 14px;
+  word-wrap: break-word;
+}
+
+/* Mensajes mios */
+.message.me {
+  align-self: flex-end;
+  background-color: #00ff88;
+  color: #000;
+  border-bottom-right-radius: 5px;
+}
+
+/* Mensajes del otro */
+.message.them {
+  align-self: flex-start;
+  background-color: #222;
+  color: #00ff88;
+  border-bottom-left-radius: 5px;
+}
+
+.message-form {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #00ff88;
+  gap: 10px;
+}
+
+.message-form input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+}
+
+.message-form button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #00ff88;
+  color: black;
+  font-weight: bold;
+}
+
+/* SIDEBAR */
+
+.sidebar input {
+  padding: 8px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+}
