@@ -1,63 +1,47 @@
-import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
+import { useContext, useState, useEffect } from "react";
+import { ChatContext } from "../Context/ChatContext";
 
-function Chat() {
+export default function Chat() {
   const { id } = useParams();
-  const [messages, setMessages] = useState([
-    { text: "Hola 👋", sender: "other" },
-    { text: "¿Cómo estás?", sender: "other" },
-  ]);
-  const [newMessage, setNewMessage] = useState("");
-  const messagesEndRef = useRef(null);
+  const { messages, sendMessage, markAsRead } = useContext(ChatContext);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (newMessage.trim() === "") return;
+  const chatMessages = messages?.[String(id)] || [];
+  const [input, setInput] = useState("");
 
-    const myMessage = {
-      text: newMessage,
-      sender: "me",
-    };
+  // 🔥 Marca mensajes como leídos al entrar
+  useEffect(() => {
+    markAsRead(id);
+  }, [id]);
 
-    setMessages((prev) => [...prev, myMessage]);
-    setNewMessage("");
+  const handleSend = () => {
+    if (!input.trim()) return;
+    sendMessage(id, input);
+    setInput("");
   };
 
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
-
   return (
-    <div className="chat-window">
-
-      {/* 🔥 Header con nombre del chat */}
-      <div className="chat-header">
-        Chat {id}
-      </div>
-
+    <div className="chat">
       <div className="messages">
-        {messages.map((msg, index) => (
+        {chatMessages.map((msg, index) => (
           <div
             key={index}
-            className={`message ${msg.sender === "me" ? "sent" : "received"}`}
+            className={`message ${msg.sender === "me" ? "me" : "other"}`}
           >
             {msg.text}
+            <span className="time">{msg.time}</span>
           </div>
         ))}
-        <div ref={messagesEndRef}></div>
       </div>
 
-      <form className="input-area" onSubmit={handleSubmit}>
+      <div className="input-area">
         <input
-          type="text"
-          placeholder="Escribe un mensaje..."
-          value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Escribí un mensaje..."
         />
-        <button type="submit">Enviar</button>
-      </form>
+        <button onClick={handleSend}>Enviar</button>
+      </div>
     </div>
   );
 }
-
-export default Chat;

@@ -1,10 +1,8 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ContactList from "./Components/ContactList";
 import Chat from "./Pages/Chat";
-import { ChatProvider } from "./Context/ChatContext";
 import "./index.css";
-
 
 function App() {
   const [progress, setProgress] = useState(0);
@@ -51,18 +49,19 @@ function App() {
   }
 
   return (
-    <ChatProvider>
-      <div className="app">
-        <ContactList />
+    <div className="app">
+      <ContactList />
 
-        <div className="chat-area">
-          <Routes>
-            <Route path="/" element={<div className="welcome">Selecciona un chat</div>} />
-            <Route path="/chat/:id" element={<Chat />} />
-          </Routes>
-        </div>
+      <div className="chat-area">
+        <Routes>
+          <Route
+            path="/"
+            element={<div className="welcome">Selecciona un chat</div>}
+          />
+          <Route path="/chat/:id" element={<Chat />} />
+        </Routes>
       </div>
-    </ChatProvider>
+    </div>
   );
 }
 
