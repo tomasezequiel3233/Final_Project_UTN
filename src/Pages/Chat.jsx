@@ -9,7 +9,7 @@ export default function Chat() {
   const chatMessages = messages?.[String(id)] || [];
   const [input, setInput] = useState("");
 
-  // 🔥 Marca mensajes como leídos al entrar
+  //  Marca mensajes como leídos al entrar
   useEffect(() => {
     markAsRead(id);
   }, [id]);
