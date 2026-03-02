@@ -1,10 +1,10 @@
 import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ContactList from "./Components/ContactList";
-import Chat from "./Pages/Chat";
-import "./index.css";
+import Chat from "./Components/Chat";
 
-function App() {
+export default function App() {
+
   const [progress, setProgress] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -15,12 +15,12 @@ function App() {
           clearInterval(interval);
           setTimeout(() => {
             setIsLoading(false);
-          }, 1500);
+          }, 1200);
           return 100;
         }
         return prev + 1;
       });
-    }, 60);
+    }, 40);
 
     return () => clearInterval(interval);
   }, []);
@@ -28,8 +28,10 @@ function App() {
   if (isLoading) {
     return (
       <div className="loading-screen">
+        <div className="matrix-bg"></div>
+
         <div className="terminal-box">
-          <p>Escaneando rostro...</p>
+          <p className="scan-text">Escaneando rostro...</p>
 
           <div className="progress-bar">
             <div
@@ -38,10 +40,10 @@ function App() {
             ></div>
           </div>
 
-          <p>{progress}%</p>
-
           {progress === 100 && (
-            <p>Rostro escaneado con éxito. Acceso concedido.</p>
+            <p className="access-granted">
+              Acceso concedido
+            </p>
           )}
         </div>
       </div>
@@ -58,11 +60,12 @@ function App() {
             path="/"
             element={<div className="welcome">Selecciona un chat</div>}
           />
-          <Route path="/chat/:id" element={<Chat />} />
+          <Route
+            path="/chat/:id"
+            element={<Chat />}
+          />
         </Routes>
       </div>
     </div>
   );
 }
-
-export default App;

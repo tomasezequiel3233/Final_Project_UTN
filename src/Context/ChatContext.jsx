@@ -3,38 +3,44 @@ import { createContext, useState } from "react";
 export const ChatContext = createContext();
 
 export const ChatProvider = ({ children }) => {
+
+  const createMessage = (text, sender, read = false) => ({
+    text,
+    sender,
+    time: getCurrentTime(),
+    timestamp: Date.now(),
+    read,
+  });
+
+  const getCurrentTime = () => {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, "0");
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+    return `${hours}:${minutes}`;
+  };
+
   const [messages, setMessages] = useState({
     "33": [
-      { text: "El ritual comienza pronto.", sender: "other", time: "21:10", read: false },
-      { text: "¿Trajiste el símbolo?", sender: "other", time: "21:11", read: false },
+      createMessage("El ritual comienza pronto.", "other"),
+      createMessage("¿Trajiste el símbolo?", "other"),
     ],
     reptil: [
-      { text: "Tu forma humana fue aprobada.", sender: "other", time: "18:12", read: false },
+      createMessage("Tu forma humana fue aprobada.", "other"),
     ],
     area51: [
-      { text: "Reiniciá el platillo volador.", sender: "other", time: "16:47", read: false },
-      { text: "Error 404: Alien no encontrado.", sender: "other", time: "16:48", read: false },
-      { text: "Recientemente un OVNI sobrevolo el perimetro ¿estas al tanto?", sender: "other", time: "17:18", read: false },
+      createMessage("Reiniciá el platillo volador.", "other"),
     ],
     Oráculo: [
-      { text: "Ya sabías que escribirías esto.", sender: "other", time: "12:45", read: false },
+      createMessage("Ya sabías que escribirías esto.", "other"),
     ],
     gatos: [
-      { text: "Miau cuántico confirmado 🐾", sender: "other", time: "14:11", read: false },
-      { text: "Dominaremos el mundo pronto.", sender: "other", time: "14:12", read: false },
-      { text: "Pero primero una siesta.", sender: "other", time: "14:13", read: false },
+      createMessage("Miau cuántico confirmado 🐾", "other"),
     ],
     Musk: [
-      { text: "Compré tu app.", sender: "other", time: "08:45", read: false },
-      { text: "Ahora es mía.", sender: "other", time: "08:46", read: false },
+      createMessage("Compré tu app.", "other"),
     ],
-    Viajero: [
-      { text: "Otra vez me quede atorado en el futuro", sender: "other", time: "20:13", read: false },
-      { text: "No envies ese mensaje mañana, lo que pasa no es bueno", sender: "other", time: "20:27", read: false },
-    ],
-    clima: [
-      { text: "Mañana llueve. No hay porque", sender: "other", time: "23:09", read: false },
-    ],
+    Viajero: [],
+    clima: [],
     mark: [],
     Nodo: [],
     Maestre: [],
@@ -45,13 +51,6 @@ export const ChatProvider = ({ children }) => {
     Profetista: [],
   });
 
-  // Generador de hora actual
-  const getCurrentTime = () => {
-    const now = new Date();
-    return now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-  };
-
-  // Respuestas automáticas según contacto
   const autoReplies = {
     "33": "El símbolo fue aceptado.",
     reptil: "La transformación continúa.",
@@ -61,7 +60,7 @@ export const ChatProvider = ({ children }) => {
     Musk: "Interesante propuesta.",
     Viajero: "El tiempo es relativo.",
     clima: "El clima ya fue modificado.",
-    mark: "Estoy analizando tus datos.",
+    mark: "I'm not a reptilian!",
     Nodo: "Conexión restablecida.",
     Maestre: "El código fluye correctamente.",
     Trump: "I'm coming for you.",
@@ -71,44 +70,46 @@ export const ChatProvider = ({ children }) => {
     Profetista: "Eso ya lo vi venir."
   };
 
-  // Enviar mensaje
   const sendMessage = (chatId, text) => {
     if (!text.trim()) return;
 
-    const newMessage = {
-      text,
-      sender: "me",
-      time: getCurrentTime(),
-      read: true,
-    };
+    const myMessage = createMessage(text, "me", false);
 
     setMessages((prev) => ({
       ...prev,
-      [chatId]: [...(prev[chatId] || []), newMessage],
+      [chatId]: [...(prev[chatId] || []), myMessage],
     }));
 
-    // Respuesta automática con delay
     setTimeout(() => {
-      const reply = {
-        text: autoReplies[chatId] || "Interesante...",
-        sender: "other",
-        time: getCurrentTime(),
-        read: false,
-      };
+      setMessages((prev) => {
 
-      setMessages((prev) => ({
-        ...prev,
-        [chatId]: [...(prev[chatId] || []), reply],
-      }));
+        const updatedChat = prev[chatId].map((msg) =>
+          msg.sender === "me" && !msg.read
+            ? { ...msg, read: true }
+            : msg
+        );
+
+        const reply = createMessage(
+          autoReplies[chatId] || "Interesante...",
+          "other",
+          false
+        );
+
+        return {
+          ...prev,
+          [chatId]: [...updatedChat, reply],
+        };
+      });
     }, 1000);
   };
 
-  // Marcar mensajes como leídos
   const markAsRead = (chatId) => {
     setMessages((prev) => ({
       ...prev,
       [chatId]: prev[chatId]?.map((msg) =>
-        msg.sender === "other" ? { ...msg, read: true } : msg
+        msg.sender === "other"
+          ? { ...msg, read: true }
+          : msg
       ),
     }));
   };

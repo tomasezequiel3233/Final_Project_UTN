@@ -2,17 +2,17 @@ const contacts = [
   {
     id: "33",
     name: "Gran Maestro 33°",
-    img: "https://images.unsplash.com/photo-1534447677768-be436bb09401"
+    img: "https://www.clarin.com/img/2022/05/10/J8u8M3Tnt_1256x620__1.jpg"
   },
   {
     id: "reptil",
     name: "Reptiliano RRHH",
-    img: "https://images.unsplash.com/photo-1599696848652-f0ff23bc911f"
+    img: "https://www.shutterstock.com/image-illustration/portrait-reptilian-man-pincenez-business-260nw-2090880040.jpg"
   },
   {
     id: "area51",
     name: "Área 51 Soporte Técnico",
-    img: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa"
+    img: "https://images.ecestaticos.com/_YZaNsZFl2cFpRNB7o_UEAPLrbE=/0x0:2272x1265/996x747/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F47c%2F01b%2F8dd%2F47c01b8dd21e771205eced53239ca137.jpg"
   },
   {
     id: "clima",
@@ -22,27 +22,27 @@ const contacts = [
   {
     id: "gatos",
     name: "Sociedad de Gatitos Cósmicos",
-    img: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131"
+    img: "https://assets.puzzlefactory.com/puzzle/464/428/original.jpg"
   },
   {
     id: "mark",
     name: "Mark Zuckerberg",
-    img: "https://upload.wikimedia.org/wikipedia/commons/5/5c/Mark_Zuckerberg_F8_2019_Keynote_%2847794449851%29_%28cropped%29.jpg"
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrVy2HXL8iW6SLV3onajsj9W8yShGNw2Tr1A&s"
   },
   {
     id: "Oráculo",
     name: "El Oráculo",
-    img: "https://images.unsplash.com/photo-1500673922987-e212871fec22"
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXuly-NCgvJV9WG4bUXgf6S_U02jeM6kq6Ag&s"
   },
   {
     id: "Nodo",
     name: "Nodo Central",
-    img: "https://images.unsplash.com/photo-1518779578993-ec3579fee39f"
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-Od9xjKUb5vTIxj-tJtnIb_9TeU84Sssxfw&s"
   },
   {
     id: "Maestre",
     name: "Maestre del Código",
-    img: "https://images.unsplash.com/photo-1519389950473-47ba0277781c"
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSo688sLrZczU8XgK1njovzODwxtPFFUYxhTw&s"
   },
   {
     id: "Trump",
@@ -52,12 +52,12 @@ const contacts = [
   {
     id: "Arquitecta",
     name: "La Arquitecta",
-    img: "https://images.unsplash.com/photo-1492724441997-5dc865305da7"
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMT3-si9XIpQY0sBCYoDe2ku3GgvvgLSkHvQ&s"
   },
   {
     id: "Daddy",
     name: "Daddy Yankee",
-    img: "https://upload.wikimedia.org/wikipedia/commons/1/1e/Daddy_Yankee_2015.jpg"
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3-aFtCe1FFskb9DvEiXaH3M1pKc1Dg8eDkA&s"
   },
   {
     id: "Musk",
@@ -67,17 +67,17 @@ const contacts = [
   {
     id: "Sombra",
     name: "Sombra Cuántica",
-    img: "https://images.unsplash.com/photo-1502082553048-f009c37129b9"
+    img: "https://img.freepik.com/fotos-premium/figura-asombrada-universos-maravilla-al-ver-caos-energia-cuantica-cielo-o-mente_1135715-2301.jpg?w=360"
   },
   {
     id: "Viajero",
     name: "Viajero del Tiempo",
-    img: "https://images.unsplash.com/photo-1446776653964-20c1d3a81b06"
+    img: "https://www.lanacion.com.ar/resizer/v2/eno-alaric-se-volvio-famoso-en-tiktok-por-sus-T7T6C53X4BGPDAVR53OQALTSVM.jpg?auth=43a6c6b4b130a2f40a8558aa8827b434892ea909d16393951e5e58bfa85752c4&width=420&height=280&quality=70&smart=true"
   },
   {
     id: "Profetista",
     name: "La Profetista",
-    img: "https://images.unsplash.com/photo-1519681393784-d120267933ba"
+    img: "https://concepto.de/wp-content/uploads/2020/10/profeta-moises-e1603155784278.jpg"
   }
 ];
 

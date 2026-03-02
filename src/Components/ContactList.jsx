@@ -1,22 +1,22 @@
-import { useContext, useMemo, useState } from "react";
+import { useContext, useState, useMemo } from "react";
+import { NavLink } from "react-router-dom";
 import { ChatContext } from "../Context/ChatContext";
-import { Link, useLocation } from "react-router-dom";
-import contacts from "../Data/contacts"; 
+import contacts from "../Data/contacts";
 
-function ContactList() {
+export default function ContactList() {
   const { messages } = useContext(ChatContext);
   const [search, setSearch] = useState("");
-  const location = useLocation();
 
   const sortedContacts = useMemo(() => {
     return [...contacts].sort((a, b) => {
-      const lastA = messages[a.id]?.slice(-1)[0];
-      const lastB = messages[b.id]?.slice(-1)[0];
+      const lastA = messages[a.id]?.[messages[a.id].length - 1];
+      const lastB = messages[b.id]?.[messages[b.id].length - 1];
 
+      if (!lastA && !lastB) return 0;
       if (!lastA) return 1;
       if (!lastB) return -1;
 
-      return lastB.time?.localeCompare(lastA.time);
+      return lastB.timestamp - lastA.timestamp;
     });
   }, [messages]);
 
@@ -26,10 +26,11 @@ function ContactList() {
 
   return (
     <div className="contact-list">
+
       <div className="contact-search">
         <input
           type="text"
-          placeholder="Buscar chat..."
+          placeholder="Buscar contacto..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -37,20 +38,22 @@ function ContactList() {
 
       <div className="contacts">
         {filteredContacts.map((contact) => {
-          const chatMessages = messages[contact.id] || [];
-          const lastMessage = chatMessages[chatMessages.length - 1];
+          const chat = messages[contact.id] || [];
+          const lastMessage = chat[chat.length - 1];
 
-          const unreadCount = chatMessages.filter(
-            (msg) => msg.sender === "other" && msg.read === false
+          const unreadCount = chat.filter(
+            (msg) => msg.sender === "other" && !msg.read
           ).length;
 
-          const isActive = location.pathname === `/chat/${contact.id}`;
-
           return (
-            <Link
-              to={`/chat/${contact.id}`}
+            <NavLink
               key={contact.id}
-              className={`contact-item ${isActive ? "active" : ""}`}
+              to={`/chat/${contact.id}`}
+              className={({ isActive }) =>
+                isActive
+                  ? "contact-item active"
+                  : "contact-item"
+              }
             >
               <img
                 src={contact.img}
@@ -62,26 +65,26 @@ function ContactList() {
                 <h4>{contact.name}</h4>
                 <p>
                   {lastMessage
-                    ? lastMessage.text.slice(0, 30)
+                    ? lastMessage.text
                     : "Sin mensajes"}
                 </p>
               </div>
 
               <div className="contact-meta">
-                {lastMessage && <span>{lastMessage.time}</span>}
+                {lastMessage && (
+                  <span>{lastMessage.time}</span>
+                )}
 
                 {unreadCount > 0 && (
-                  <div className="unread-badge">
+                  <span className="unread-badge">
                     {unreadCount}
-                  </div>
+                  </span>
                 )}
               </div>
-            </Link>
+            </NavLink>
           );
         })}
       </div>
     </div>
   );
 }
-
-export default ContactList;
