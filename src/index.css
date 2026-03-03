@@ -48,7 +48,7 @@ body {
 
 .contact-list {
   border: none ;
-  width: 300px;
+  width: 350px;
   min-width: 260px;
   background-color: #000;
   border-right: 1px solid #00ff88;
@@ -272,6 +272,84 @@ body {
 /* LOADING SCREEN MATRIX */
 /* ============================= */
 
+/* LOADING SCREEN PREMIUM */
+
+.loading-screen {
+  height: 100vh;
+  background-color: black;
+  color: #00ff88;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: monospace;
+  text-align: center;
+}
+
+.terminal-box {
+  width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+/* LOGO */
+
+.logo {
+  font-size: 2rem;
+  letter-spacing: 3px;
+  text-shadow: 0 0 10px #00ff88,
+               0 0 20px #00ff88,
+               0 0 40px #00ff88;
+}
+
+/* TEXTO ESCANEO */
+
+.scan-text {
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  opacity: 0.8;
+}
+
+/* BARRA */
+
+.progress-bar {
+  width: 100%;
+  height: 18px;
+  border: 1px solid #00ff88;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #00ff88;
+  transition: width 0.05s linear;
+  box-shadow: 0 0 10px #00ff88;
+}
+
+/* CONTADOR */
+
+.progress-counter {
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  opacity: 0.7;
+}
+
+/* ACCESO */
+
+.access-granted {
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  animation: fadeIn 0.8s ease-in;
+  text-shadow: 0 0 10px #00ff88;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 .loading-screen {
   position: relative;
   height: 100vh;
@@ -365,6 +443,157 @@ body {
 .welcome-screen h2 {
   margin-bottom: 10px;
   text-shadow: 0 0 8px #00ff88;
+}
+
+/* CONTACT INFO PAGE */
+
+.contact-info-page {
+  flex: 1;
+  background-color: black;
+  color: #00ff88;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+}
+
+.back-btn {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  color: #00ff88;
+  cursor: pointer;
+  margin-bottom: 30px;
+}
+
+.contact-card {
+  text-align: center;
+}
+
+.contact-info-avatar {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  box-shadow: 0 0 15px #00ff88;
+  transition: transform 0.3s;
+}
+
+.contact-info-avatar:hover {
+  transform: scale(1.05);
+}
+
+.contact-role {
+  margin-top: 15px;
+  opacity: 0.7;
+}
+
+/* IMAGE MODAL */
+
+.image-modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-image {
+  max-width: 80%;
+  max-height: 80%;
+  box-shadow: 0 0 30px #00ff88;
+}
+
+/* HEADER CLICK */
+
+.clickable {
+  cursor: pointer;
+}
+
+/* CONTACT INFO PAGE */
+
+.contact-info-page {
+  flex: 1;
+  background-color: black;
+  color: #00ff88;
+  padding: 30px;
+  overflow-y: auto;
+}
+
+.info-header {
+  margin-bottom: 20px;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: #00ff88;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.contact-profile {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.contact-info-avatar {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  box-shadow: 0 0 20px #00ff88;
+  transition: transform 0.3s;
+}
+
+.contact-info-avatar:hover {
+  transform: scale(1.05);
+}
+
+.contact-phone {
+  margin: 10px;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.contact-status {
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+.contact-options {
+  border-top: 1px solid #003d2b;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.option-item {
+  padding: 15px;
+  border: 1px solid #003d2b;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.option-item:hover {
+  background-color: #001a12;
+  border-color: #00ff88;
+  box-shadow: 0 0 10px #00ff88;
+}
+
+.option-item.danger {
+  color: #ff4d4d;
+  border-color: #330000;
+}
+
+.option-item.danger:hover {
+  background-color: #220000;
+  box-shadow: 0 0 10px #ff4d4d;
 }
 
 /* ============================= */

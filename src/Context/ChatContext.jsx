@@ -21,6 +21,7 @@ export const ChatProvider = ({ children }) => {
 
   const initialData = {
     "33": [
+      createMessage("Recuerda...", "other"),
       createMessage("El ritual comienza pronto.", "other"),
       createMessage("¿Trajiste el símbolo?", "other"),
     ],
@@ -28,10 +29,11 @@ export const ChatProvider = ({ children }) => {
       createMessage("Tu forma humana fue aprobada.", "other"),
     ],
     area51: [
-      createMessage("Reiniciá el platillo volador.", "other"),
+      createMessage("Recientemente un OVNI sobrevolo el recinto.", "other"),
+      createMessage("alguna informacion al respecto?.", "other"),
     ],
     Oráculo: [
-      createMessage("Ya sabías que escribirías esto.", "other"),
+      createMessage("Ya tomaste la decision?.", "other"),
     ],
     gatos: [
       createMessage("Miau cuántico confirmado 🐾", "other"),
@@ -39,8 +41,13 @@ export const ChatProvider = ({ children }) => {
     Musk: [
       createMessage("Compré tu app.", "other"),
     ],
-    Viajero: [],
-    clima: [],
+    clima: [
+        createMessage("Mañana llueve. No hay porque", "other"),
+    ],
+    Viajero: [
+        createMessage("No envies ese mensaje a esa persona. El descenlace no es bueno", "other"),
+        createMessage("Retiro lo dicho, patee una piedra y cambio tu futuro", "other"),
+    ],
     mark: [],
     Nodo: [],
     Maestre: [],
@@ -66,11 +73,11 @@ export const ChatProvider = ({ children }) => {
   const autoReplies = {
     "33": "El símbolo fue aceptado.",
     reptil: "La transformación continúa.",
-    area51: "Estamos investigando el incidente.",
-    Oráculo: "El destino ya fue escrito.",
+    area51: "Okey... Estamos investigando el incidente.",
+    Oráculo: "Ya sabías que escribirías esto.",
     gatos: "Miau estratégico en proceso 🐾",
-    Musk: "Interesante propuesta.",
-    Viajero: "El tiempo es relativo.",
+    Musk: "Ya la vendi y compre tu otra app.",
+    Viajero: "Otra vez estoy atorado en el futuro.",
     clima: "El clima ya fue modificado.",
     mark: "I'm not a reptilian!",
     Nodo: "Conexión restablecida.",

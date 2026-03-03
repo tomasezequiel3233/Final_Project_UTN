@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useContext, useState, useEffect, useRef } from "react";
 import { ChatContext } from "../Context/ChatContext";
 import contacts from "../Data/contacts";
@@ -6,6 +6,8 @@ import contacts from "../Data/contacts";
 export default function Chat() {
 
   const { id } = useParams();
+  const navigate = useNavigate();
+
   const { messages, sendMessage, markAsRead, typing } = useContext(ChatContext);
 
   const [input, setInput] = useState("");
@@ -52,12 +54,16 @@ export default function Chat() {
     <div className="chat">
 
       {currentContact && (
-        <div className="chat-header">
+        <div
+          className="chat-header clickable"
+          onClick={() => navigate(`/contact/${id}`)}
+        >
           <img
             src={currentContact.img}
             alt={currentContact.name}
             className="chat-avatar"
           />
+
           <div className="chat-header-info">
             <h3>{currentContact.name}</h3>
             <span className="status">

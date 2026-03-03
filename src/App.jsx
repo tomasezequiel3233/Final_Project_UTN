@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ContactList from "./Components/ContactList";
 import Chat from "./Components/Chat";
+import ContactInfo from "./Components/ContactInfo";
 
 export default function App() {
 
@@ -29,7 +30,14 @@ export default function App() {
     return (
       <div className="loading-screen">
         <div className="terminal-box">
-          <p>Escaneando rostro...</p>
+
+          <h1 className="logo">
+            ILLUMI-CHAT 👁️
+          </h1>
+
+          <p className="scan-text">
+            ESCANEANDO ROSTRO...
+          </p>
 
           <div className="progress-bar">
             <div
@@ -38,11 +46,16 @@ export default function App() {
             ></div>
           </div>
 
+          <div className="progress-counter">
+            {progress}%
+          </div>
+
           {progress === 100 && (
             <p className="access-granted">
-              Acceso concedido
+              ACCESO CONCEDIDO
             </p>
           )}
+
         </div>
       </div>
     );
@@ -50,6 +63,7 @@ export default function App() {
 
   return (
     <div className="app">
+
       <ContactList />
 
       <div className="chat-area">
@@ -58,17 +72,25 @@ export default function App() {
             path="/"
             element={
               <div className="welcome-screen">
-                <h2>Illumi-Chat 👁️</h2>
+                <h2>ILLUMI-CHAT 👁️</h2>
                 <p>Selecciona un contacto para iniciar comunicación.</p>
               </div>
             }
           />
+
           <Route
             path="/chat/:id"
             element={<Chat />}
           />
+
+          <Route
+            path="/contact/:id"
+            element={<ContactInfo />}
+          />
+
         </Routes>
       </div>
+
     </div>
   );
 }
