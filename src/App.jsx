@@ -28,10 +28,8 @@ export default function App() {
   if (isLoading) {
     return (
       <div className="loading-screen">
-        <div className="matrix-bg"></div>
-
         <div className="terminal-box">
-          <p className="scan-text">Escaneando rostro...</p>
+          <p>Escaneando rostro...</p>
 
           <div className="progress-bar">
             <div
@@ -58,7 +56,12 @@ export default function App() {
         <Routes>
           <Route
             path="/"
-            element={<div className="welcome">Selecciona un chat</div>}
+            element={
+              <div className="welcome-screen">
+                <h2>Illumi-Chat 👁️</h2>
+                <p>Selecciona un contacto para iniciar comunicación.</p>
+              </div>
+            }
           />
           <Route
             path="/chat/:id"

@@ -4,8 +4,9 @@ import { ChatContext } from "../Context/ChatContext";
 import contacts from "../Data/contacts";
 
 export default function Chat() {
+
   const { id } = useParams();
-  const { messages, sendMessage, markAsRead } = useContext(ChatContext);
+  const { messages, sendMessage, markAsRead, typing } = useContext(ChatContext);
 
   const [input, setInput] = useState("");
   const messagesEndRef = useRef(null);
@@ -16,14 +17,14 @@ export default function Chat() {
     (contact) => contact.id === id
   );
 
-  //  Marcar como leído cuando cambia el chat
+  // Marcar como leído al entrar
   useEffect(() => {
     if (id) {
       markAsRead(id);
     }
   }, [id]);
 
-  //  Marcar como leído SOLO si hay mensajes no leídos
+  // Marcar como leído si llegan nuevos mensajes
   useEffect(() => {
     if (!id) return;
 
@@ -36,7 +37,7 @@ export default function Chat() {
     }
   }, [chatMessages]);
 
-  //  Scroll automático
+  // Scroll automático
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [chatMessages]);
@@ -59,7 +60,9 @@ export default function Chat() {
           />
           <div className="chat-header-info">
             <h3>{currentContact.name}</h3>
-            <span className="status">En línea</span>
+            <span className="status">
+              {typing === id ? "Escribiendo..." : "En línea"}
+            </span>
           </div>
         </div>
       )}

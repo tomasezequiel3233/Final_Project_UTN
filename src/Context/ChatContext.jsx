@@ -1,8 +1,15 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const ChatContext = createContext();
 
 export const ChatProvider = ({ children }) => {
+
+  const getCurrentTime = () => {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, "0");
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+    return `${hours}:${minutes}`;
+  };
 
   const createMessage = (text, sender, read = false) => ({
     text,
@@ -12,14 +19,7 @@ export const ChatProvider = ({ children }) => {
     read,
   });
 
-  const getCurrentTime = () => {
-    const now = new Date();
-    const hours = String(now.getHours()).padStart(2, "0");
-    const minutes = String(now.getMinutes()).padStart(2, "0");
-    return `${hours}:${minutes}`;
-  };
-
-  const [messages, setMessages] = useState({
+  const initialData = {
     "33": [
       createMessage("El ritual comienza pronto.", "other"),
       createMessage("¿Trajiste el símbolo?", "other"),
@@ -49,7 +49,19 @@ export const ChatProvider = ({ children }) => {
     Daddy: [],
     Sombra: [],
     Profetista: [],
+  };
+
+  const [messages, setMessages] = useState(() => {
+    const saved = localStorage.getItem("illumi-chat");
+    return saved ? JSON.parse(saved) : initialData;
   });
+
+  const [typing, setTyping] = useState(null);
+
+  // Persistencia
+  useEffect(() => {
+    localStorage.setItem("illumi-chat", JSON.stringify(messages));
+  }, [messages]);
 
   const autoReplies = {
     "33": "El símbolo fue aceptado.",
@@ -80,6 +92,8 @@ export const ChatProvider = ({ children }) => {
       [chatId]: [...(prev[chatId] || []), myMessage],
     }));
 
+    setTyping(chatId);
+
     setTimeout(() => {
       setMessages((prev) => {
 
@@ -100,7 +114,10 @@ export const ChatProvider = ({ children }) => {
           [chatId]: [...updatedChat, reply],
         };
       });
-    }, 1000);
+
+      setTyping(null);
+
+    }, 1200);
   };
 
   const markAsRead = (chatId) => {
@@ -116,7 +133,7 @@ export const ChatProvider = ({ children }) => {
 
   return (
     <ChatContext.Provider
-      value={{ messages, sendMessage, markAsRead }}
+      value={{ messages, sendMessage, markAsRead, typing }}
     >
       {children}
     </ChatContext.Provider>
