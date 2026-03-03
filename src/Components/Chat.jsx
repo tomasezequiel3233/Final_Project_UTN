@@ -26,7 +26,7 @@ export default function Chat() {
     }
   }, [id]);
 
-  // Marcar como leído si llegan nuevos mensajes
+  // Marcar como leído si llegan mensajes nuevos
   useEffect(() => {
     if (!id) return;
 
@@ -50,8 +50,19 @@ export default function Chat() {
     setInput("");
   };
 
+  const isMobile = window.innerWidth <= 768;
+
   return (
     <div className="chat">
+
+      {isMobile && (
+        <button
+          className="mobile-back"
+          onClick={() => navigate("/")}
+        >
+          ←
+        </button>
+      )}
 
       {currentContact && (
         <div

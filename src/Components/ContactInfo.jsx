@@ -47,20 +47,22 @@ export default function ContactInfo() {
 
       <div className="contact-options">
 
-        <div className="option-item">
-          📂 Ver archivos secretos
+        <div className="options-section">
+          <div className="option-item">📂 Ver archivos secretos</div>
+          <div className="option-item">🔐 Claves de acceso</div>
+          <div className="option-item">🛰 Historial de comunicaciones</div>
         </div>
 
-        <div className="option-item">
-          🔕 Silenciar conversación
+        <div className="options-section">
+          <div className="option-item">🔕 Silenciar conversación</div>
+          <div className="option-item">📌 Fijar en el sistema</div>
+          <div className="option-item">🧾 Exportar conversación</div>
         </div>
 
-        <div className="option-item danger">
-          🚫 Bloquear contacto
-        </div>
-
-        <div className="option-item danger">
-          ⚠️ Reportar anomalía
+        <div className="options-section">
+          <div className="option-item danger">🚫 Bloquear contacto</div>
+          <div className="option-item danger">⚠️ Reportar anomalía</div>
+          <div className="option-item danger">🗑 Eliminar del sistema</div>
         </div>
 
       </div>

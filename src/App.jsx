@@ -1,10 +1,16 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ContactList from "./Components/ContactList";
 import Chat from "./Components/Chat";
 import ContactInfo from "./Components/ContactInfo";
 
 export default function App() {
+
+  const location = useLocation();
+
+  const isFullScreenRoute =
+    location.pathname.startsWith("/chat/") ||
+    location.pathname.startsWith("/contact/");
 
   const [progress, setProgress] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -14,9 +20,7 @@ export default function App() {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
-          setTimeout(() => {
-            setIsLoading(false);
-          }, 1200);
+          setTimeout(() => setIsLoading(false), 1000);
           return 100;
         }
         return prev + 1;
@@ -31,9 +35,7 @@ export default function App() {
       <div className="loading-screen">
         <div className="terminal-box">
 
-          <h1 className="logo">
-            ILLUMI-CHAT 👁️
-          </h1>
+          <h1 className="logo">ILLUMI-CHAT 👁️</h1>
 
           <p className="scan-text">
             ESCANEANDO ROSTRO...
@@ -43,7 +45,7 @@ export default function App() {
             <div
               className="progress-fill"
               style={{ width: `${progress}%` }}
-            ></div>
+            />
           </div>
 
           <div className="progress-counter">
@@ -62,12 +64,13 @@ export default function App() {
   }
 
   return (
-    <div className="app">
+    <div className={`app ${isFullScreenRoute ? "chat-open" : ""}`}>
 
       <ContactList />
 
       <div className="chat-area">
         <Routes>
+
           <Route
             path="/"
             element={
@@ -78,15 +81,9 @@ export default function App() {
             }
           />
 
-          <Route
-            path="/chat/:id"
-            element={<Chat />}
-          />
+          <Route path="/chat/:id" element={<Chat />} />
 
-          <Route
-            path="/contact/:id"
-            element={<ContactInfo />}
-          />
+          <Route path="/contact/:id" element={<ContactInfo />} />
 
         </Routes>
       </div>
